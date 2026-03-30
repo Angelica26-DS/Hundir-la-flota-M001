@@ -4,4 +4,4 @@ COLUMNAS = 10
 AGUA = "~"
 BARCO = "B"
 TOCADO = "X"
-FALLO = "O" 
+FALLO = "O"
