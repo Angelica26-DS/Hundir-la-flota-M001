@@ -8,8 +8,5 @@ class Tablero:
 
     def mostrar_tablero(self):
         print(self.tablero)
-    
-tablero1 = Tablero("Hugo")
-tablero1.mostrar_tablero()
 
 
