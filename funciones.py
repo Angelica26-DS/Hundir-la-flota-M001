@@ -1,4 +1,6 @@
-from variables import FILAS, COLUMNAS
+import numpy as np
+import random
+from variables import FILAS, COLUMNAS, AGUA, BARCO, TOCADO, FALLO
 
 
 def mostrar_tablero(tablero):
@@ -69,27 +71,63 @@ def pedir_coordenadas():
 #                         tablero.tablero[fila:fila+eslora, col] = BARCO
 #                         colocado = True
 
-# def disparar(tablero, fila, col):
-#     celda = tablero.tablero[fila, col]
-#     if celda == BARCO:
-#         print("¡Tocado! 💥")
-#         tablero.tablero[fila, col] = TOCADO
-#         return True
-#     elif celda == AGUA:
-#         print("¡Agua! 💦")
-#         tablero.tablero[fila, col] = FALLO
-#         return False
-#     elif celda == TOCADO or celda == FALLO:
-#         print("Ya habías disparado a estas coordenadas.")
-#         return False
+def disparar(tablero, fila, col):
+    """Procesa un disparo en el tablero y actualiza su estado.
 
-# def disparo_aleatorio_maquina(tablero_jugador):
-#     while True:
-#         fila = random.randint(0, FILAS - 1)
-#         col = random.randint(0, COLUMNAS - 1)
-#         celda = tablero_jugador.tablero[fila, col]
-#         if celda != TOCADO and celda != FALLO:
-#             return fila, col
+    Verifica el contenido de la celda y lo sustituye por TOCADO o FALLO
+    según corresponda, imprimiendo el resultado por consola.
 
-# def comprobar_victoria(tablero):
-#     return not np.any(tablero.tablero == BARCO)
+    Args:
+        tablero (Tablero): El tablero sobre el que se efectúa el disparo.
+        fila (int): Fila elegida para el disparo.
+        col (int): Columna elegida para el disparo.
+
+    Returns:
+        bool o None: True si hay impacto (BARCO), False si falla (AGUA),
+                     y None si se dispara a una coordenada repetida.
+    """
+    celda = tablero.tablero[fila, col]
+    if celda == BARCO:
+        print("¡Tocado! 💥")
+        tablero.tablero[fila, col] = TOCADO
+        return True
+    elif celda == AGUA:
+        print("¡Agua! 💦")
+        tablero.tablero[fila, col] = FALLO
+        return False
+    elif celda == TOCADO or celda == FALLO:
+        print("Ya habías disparado a estas coordenadas.")
+        return None
+
+def disparo_aleatorio_maquina(tablero_jugador):
+    """Genera coordenadas aleatorias válidas para el turno de la máquina.
+
+    Busca de forma aleatoria en el tablero hasta encontrar una celda
+    a la que la máquina no haya disparado previamente.
+
+    Args:
+        tablero_jugador (Tablero): El tablero del jugador humano.
+
+    Returns:
+        tuple: (fila, col) con las coordenadas válidas para el disparo.
+    """
+    while True:
+        fila = random.randint(0, FILAS - 1)
+        col = random.randint(0, COLUMNAS - 1)
+        celda = tablero_jugador.tablero[fila, col]
+        if celda != TOCADO and celda != FALLO:
+            return fila, col
+
+def comprobar_victoria(tablero):
+    """Verifica si todos los barcos del tablero han sido hundidos.
+
+    Comprueba en la matriz del tablero si queda alguna celda con el 
+    estado BARCO.
+
+    Args:
+        tablero (Tablero): El tablero que se desea comprobar.
+
+    Returns:
+        bool: True si no quedan barcos (victoria), False en caso contrario.
+    """
+    return not np.any(tablero.tablero == BARCO)
