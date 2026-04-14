@@ -48,28 +48,23 @@ def pedir_coordenadas():
         except ValueError:
             print("Error: Introduce números enteros.")
 
-
-# =============================================================================
-# FASE 2 — Funciones pendientes de integrar con el resto del equipo
-# =============================================================================
-
-# def colocar_barcos_aleatorios(tablero, lista_esloras):
-#     for eslora in lista_esloras:
-#         colocado = False
-#         while not colocado:
-#             fila = random.randint(0, FILAS - 1)
-#             col = random.randint(0, COLUMNAS - 1)
-#             orientacion = random.choice(['H', 'V'])
-#             if orientacion == 'H':
-#                 if col + eslora <= COLUMNAS:
-#                     if np.all(tablero.tablero[fila, col:col+eslora] == AGUA):
-#                         tablero.tablero[fila, col:col+eslora] = BARCO
-#                         colocado = True
-#             elif orientacion == 'V':
-#                 if fila + eslora <= FILAS:
-#                     if np.all(tablero.tablero[fila:fila+eslora, col] == AGUA):
-#                         tablero.tablero[fila:fila+eslora, col] = BARCO
-#                         colocado = True
+def colocar_barcos_aleatorios(tablero, lista_esloras):
+    for eslora in lista_esloras:
+        colocado = False
+        while not colocado:
+            fila = random.randint(0, FILAS - 1)
+            col = random.randint(0, COLUMNAS - 1)
+            orientacion = random.choice(['H', 'V'])
+            if orientacion == 'H':
+                if col + eslora <= COLUMNAS:
+                    if np.all(tablero.tablero[fila, col:col+eslora] == AGUA):
+                        tablero.tablero[fila, col:col+eslora] = BARCO
+                        colocado = True
+            elif orientacion == 'V':
+                if fila + eslora <= FILAS:
+                    if np.all(tablero.tablero[fila:fila+eslora, col] == AGUA):
+                        tablero.tablero[fila:fila+eslora, col] = BARCO
+                        colocado = True
 
 def disparar(tablero, fila, col):
     """Procesa un disparo en el tablero y actualiza su estado.
