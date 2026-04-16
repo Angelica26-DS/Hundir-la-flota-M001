@@ -96,5 +96,5 @@ if __name__ == "__main__":
         [AGUA]*10,
     ]
 
-    mostrar_tablero(tablero_test)
+    mostrar_tablero_visual(tablero_test)
     print(tablero_a_markdown(tablero_test))
