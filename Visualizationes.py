@@ -22,7 +22,7 @@ def tablero_a_markdown(tablero):
         fila_md = f"| {i+1} | "
 
         # LOOP MUST BE INSIDE
-        for celda in fila:
+        for celda in fila:            
             if celda == AGUA:
                 simbolo = "."
             elif celda == BARCO:
@@ -50,7 +50,7 @@ def tablero_a_markdown(tablero):
 
 # CONSOLE FUNCTION VISUALISATIION 
 
-def mostrar_tablero(tablero):
+def mostrar_tablero_visual(tablero):
 
     columnas = "ABCDEFGHIJ"
     num_columnas = tablero.shape[1] if hasattr(tablero, "shape") else len(tablero[0])
@@ -61,6 +61,7 @@ def mostrar_tablero(tablero):
         fila_str = f"{i+1:<2} "
 
         for celda in fila:
+            
             if celda == AGUA:
                 simbolo = "."
             elif celda == BARCO:
