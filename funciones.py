@@ -9,7 +9,10 @@ def mostrar_tablero(tablero):
     Args:
         tablero (Tablero): El objeto Tablero que se desea mostrar.
     """
-    print(tablero.tablero)
+    for fila in tablero.tablero:
+        for celda in fila:
+            print(celda, end=" ")
+        print()
 
 
 def validar_coordenadas(fila, col):
@@ -66,15 +69,12 @@ def disparar(tablero, fila, col):
     """
     celda = tablero.tablero[fila, col]
     if celda == BARCO:
-        print("¡Tocado! 💥")
         tablero.tablero[fila, col] = TOCADO
         return True
     elif celda == AGUA:
-        print("¡Agua! 💦")
         tablero.tablero[fila, col] = FALLO
         return False
     elif celda == TOCADO or celda == FALLO:
-        print("Ya habías disparado a estas coordenadas.")
         return None
 
 
